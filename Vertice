@@ -1,0 +1,63 @@
+package com.example.grafo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Vertice {
+    String nombre;
+    public List<Arco> LArcos;
+    boolean marcado;
+
+    public Vertice(String nom) {
+        this.nombre = nom;
+        this.LArcos = new ArrayList();
+        this.marcado = false;
+    }
+
+    public void setNombre(String nom) {
+        this.nombre = nom;
+    }
+
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public int getCantArcos() {
+        return LArcos.size();
+    }
+
+
+    //Inserta el arco q ya viene creado
+    public void insertarArco(Arco arco) {
+        LArcos.add(LArcos.size(), arco);
+    }
+
+    public void eliminarArco(String nombreVD) {
+        int i = 0;
+        Arco a;
+        while (i < LArcos.size()) {
+            a = (Arco) LArcos.get(i);
+            if (a.getNombreVertD() == nombreVD) {
+                LArcos.remove(i);
+            }
+            i++;
+        }
+    }
+
+    public void ordenarArcosAlf() {
+        Arco aux;
+        Arco a1;
+        Arco a2;
+        for (int i = 0; i < LArcos.size(); i++) {
+            for (int j = 0; j < LArcos.size() - 1; j++) {
+                a1 = (Arco) LArcos.get(j);
+                a2 = (Arco) LArcos.get(j + 1);
+                if (a1.getNombreVertD().compareTo(a2.getNombreVertD()) > 0) {
+                    aux = (Arco) LArcos.get(j);
+                    LArcos.set(j, a2);
+                    LArcos.set(j + 1, aux);
+                }
+            }
+        }
+    }
+}
